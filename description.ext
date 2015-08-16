@@ -4,12 +4,12 @@ enableDebugConsole = 1;
 DisabledAI = true;
 
 
-corpseLimit = 4; 
+corpseLimit = 4;
 corpseRemovalMinTime = 20;
 corpseRemovalMaxTime = 35;
 
 
-wreckLimit = 3; 
+wreckLimit = 3;
 wreckRemovalMinTime = 60;
 wreckRemovalMaxTime = 120;
 
@@ -19,4 +19,17 @@ class Header
 	gameType = RPG;
 	minPlayers = 1;
 	maxPlayers = 16;
+};
+
+
+
+class CfgFunctions
+{
+	class aegis
+	{
+		class initialization
+		{
+			class clientInit {file = "aegis\functions\clientInit.sqf";};
+		};
+	};
 };

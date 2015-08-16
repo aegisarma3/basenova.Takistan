@@ -7,6 +7,8 @@ sleep 2;
  ["setFileName", "aegis_finances"] call pdw;
 
 
+
+
 // ## Customizações ################################################################################################
 
 #define START_MONEY 5000 			// Dinheiro inicial para quem ainda não ganhou nada.
@@ -21,6 +23,7 @@ sleep 2;
 // #################################################################################################################
 
 
+waitUntil {isServer || {not(isNull player)}};
 
 // Verifica o quanto de dinheiro o player tem
 _balance = ["getPlayerBalance", [name player, getPlayerUID player]] call pdw;
@@ -32,6 +35,9 @@ if (undefined(_balance)) then {
 } else {
 	hint format ["Você possui $ %1", _balance];
 };
+
+
+
 
 f_arsenal = {
 	["Preload"] call BIS_fnc_arsenal; 
