@@ -1,13 +1,4 @@
-#include "macro.h"
-
-call compilefinal preprocessFileLineNumbers "aegis\oo_pdw.sqf";
-sleep 2;
-
- pdw = ["new", "inidbi"] call OO_PDW;
- ["setFileName", "aegis_finances"] call pdw;
-
-
-
+#include "aegis\pdw\macro.h"
 
 // ## Customizações ################################################################################################
 
@@ -25,22 +16,31 @@ sleep 2;
 
 waitUntil {isServer || {not(isNull player)}};
 
+_player = _this;
+_playerUID = getPlayerUID _player;
+_name  = name _player;
+
+
+
 // Verifica o quanto de dinheiro o player tem
-_balance = ["getPlayerBalance", [name player, getPlayerUID player]] call pdw;
+_balance = ["getPlayerBalance", [_name, _playerUID]] call pdw;
 
 // Verifica se é a primeira vez que o player entra e dá dinheiro a ele
 if (undefined(_balance)) then {
-	["savePlayerMoney", [name player, getPlayerUID player, START_MONEY]] call pdw;
-	hint format ["Foram adicionados $%1 em sua conta. Bem vindo!", START_MONEY];	
+	["savePlayerMoney", [_name, _playerUID, START_MONEY]] call pdw;
+	rHINT = [_player, format ["Foram adicionados $%1 em sua conta. Bem vindo!", START_MONEY]];
+	publicVariable "rHINT";
+
 } else {
-	hint format ["Você possui $ %1", _balance];
+	rHINT = [_player, format ["Seu saldo é de $%1", _balance]];
+	publicVariable "rHINT";
 };
 
 
 
 
 f_arsenal = {
-	["Preload"] call BIS_fnc_arsenal; 
+	["Preload"] call BIS_fnc_arsenal;
 	["Open",true] call BIS_fnc_arsenal;
 };
 
@@ -51,7 +51,7 @@ f_transaction = {
 
 	_cost = _this select 0;
 	_action = _this select 1;
-	
+
 
 	if (_cost > _balance) then {
 		hintC "Seu saldo é insuficiente para esta ação.";
@@ -61,7 +61,7 @@ f_transaction = {
 
 		["savePlayerMoney", [name player, getPlayerUID player, _balance]] call pdw;
 		if (_balance <= 0) then {_balance = 1;};
-		call _action;	
+		call _action;
 	};
 
 };
@@ -81,14 +81,14 @@ f_show_balance = {
 
 
 if (isServer) then {
-	
+
 	clearMagazineCargoGlobal NAME_OF_THE_ARMORY;
 	clearWeaponCargoGlobal NAME_OF_THE_ARMORY;
 	clearItemCargoGlobal NAME_OF_THE_ARMORY;
 	clearBackpackCargoGlobal NAME_OF_THE_ARMORY;
-	
+
 	// Ativa o arsenal
-	NAME_OF_THE_ARMORY allowDamage false; 
+	NAME_OF_THE_ARMORY allowDamage false;
 	[
 		[
 			NAME_OF_THE_ARMORY,
@@ -99,7 +99,7 @@ if (isServer) then {
 					[ARSENAL_COST, f_arsenal] call f_transaction;
 
 
-					
+
 				},
 				nil,
 				6,
