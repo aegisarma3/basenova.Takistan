@@ -231,17 +231,18 @@
 			_object;
 		};
 
-		PUBLIC FUNCTION("object","savePlayer") {
+		PUBLIC FUNCTION("array","savePlayer") {
 			private ["_name", "_object", "_result", "_array"];
 
-			_object = _this;
-			_name = getPlayerUID _this;
+			_object = _this select 0;
+			_name = _this select 1;
+			_uid = _this select 2;
 
 			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to savePlayer");
 			};
 
-			_name = format["pdw_unit_%1", getPlayerUID _this];
+			_name = format["aegis_%1_%2_unit", _name,_uid];
 
 			_array = [(getpos _object), (getdir _object), (getdammage _object)];
 
@@ -249,16 +250,18 @@
 			MEMBER("write", _save);
 		};
 
-		PUBLIC FUNCTION("object","loadPlayer") {
+		PUBLIC FUNCTION("array","loadPlayer") {
 			private ["_name", "_array", "_position", "_damage", "_dir", "_typeof", "_unit"];
 
-			_name = getPlayerUID _this;
+			_object = _this select 0;
+			_name = _this select 1;
+			_uid = _this select 2;
 
 			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to loadUnit");
 			};
 
-			_name = format["pdw_unit_%1", getPlayerUID _this];
+			_name = format["aegis_%1_%2_unit", _name,_uid];
 
 			_save = [_name, "ARRAY"];
 			_array = MEMBER("read", _save);
@@ -321,14 +324,15 @@
 		PUBLIC FUNCTION("array","saveInventory") {
 			private ["_name", "_object", "_result", "_array"];
 
-			_name = _this select 0;
-			_object = _this select 1;
+			_object = _this select 0;
+			_name = _this select 1;
+			_uid =_this select 2;
 
 			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to saveUnit");
 			};
 
-			_name = "pdw_inventory_" + _name;
+			_name = format["aegis_%1_%2_inventory", _name,_uid];
 
 			_array = [
 				(headgear _object),
@@ -358,14 +362,15 @@
 		PUBLIC FUNCTION("array","loadInventory") {
 			private ["_name", "_array", "_headgear", "_goggles", "_uniform", "_uniformitems", "_vest", "_vestitems", "_backpack", "_backpackitems", "_primaryweapon", "_primaryweaponitems", "_primaryweaponmagazine", "_secondaryweapon", "_secondaryweaponitems", "_secondaryweaponmagazine", "_handgun", "_handgunweaponitems", "_handgunweaponmagazine", "_assigneditems", "_position", "_damage", "_dir", "_object"];
 
-			_name = _this select 0;
-			_object = _this select 1;
+			_object = _this select 0;
+			_name = _this select 1;
+			_uid =_this select 2;
 
 			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to loadUnit");
 			};
 
-			_name = "pdw_inventory_" + _name;
+			_name = format["aegis_%1_%2_inventory", _name,_uid];
 
 			MEMBER("ClearInventory", _object);
 
@@ -487,7 +492,7 @@
 				MEMBER("ToLog", "PDW: require a unit name to savePlayerMoney");
 			};
 
-			_name = format["aegis_%1_%2", _name, _UID];
+			_name = format["aegis_%1_%2_money", _name, _UID];
 
 			_array = [_amount];
 
@@ -508,7 +513,7 @@
 				MEMBER("ToLog", "PDW: require a unit name to getPlayerBalance");
 			};
 
-			_name = format["aegis_%1_%2", _name, _UID];
+			_name = format["aegis_%1_%2_money", _name, _UID];
 
 			_save = [_name, "ARRAY"];
 			_array = MEMBER("read", _save);
