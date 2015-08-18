@@ -3,19 +3,19 @@
 	Copyright (C) 2014 Nicolas BOITEUX
 
 	CLASS OO_PDW -  Pesistent Data World
-	
+
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
-	
+
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
-	
+
 	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	*/
 
 	#include "oop.h"
@@ -24,9 +24,9 @@
 		PRIVATE VARIABLE("string","driver");
 		PRIVATE VARIABLE("string","filename");
 
-		PUBLIC FUNCTION("string","constructor") { 
+		PUBLIC FUNCTION("string","constructor") {
 			if(_this == "inidbi") then {
-				if !(isClass(configFile >> "cfgPatches" >> "inidbi")) exitwith { 
+				if !(isClass(configFile >> "cfgPatches" >> "inidbi")) exitwith {
 					MEMBER("ToLog", "PDW: requires INIDBI");
 				};
 				call compilefinal preProcessFile "\inidbi\init.sqf";
@@ -41,7 +41,7 @@
 
 		PRIVATE FUNCTION("array","read") {
 			private ["_driver", "_key", "_result", "_filename"];
-			
+
 			_key = _this select 0;
 			_type = _this select 1;
 
@@ -66,7 +66,7 @@
 
 		PRIVATE FUNCTION("array","write") {
 			private ["_driver", "_key", "_array", "_result", "_filename"];
-			
+
 			_key = _this select 0;
 			_array = _this select 1;
 
@@ -89,7 +89,7 @@
 				};
 			};
 			_result;
-		};		
+		};
 
 		PUBLIC FUNCTION("string","toLog") {
 			hint _this;
@@ -126,7 +126,7 @@
 			MEMBER("write", _save);
 		};
 
-		
+
 		PUBLIC FUNCTION("","saveObjects") {
 			private ["_save", "_counter"];
 			{
@@ -141,7 +141,7 @@
 
 		PUBLIC FUNCTION("","loadObjects") {
 			private ["_name", "_counter", "_object","_objects"];
-			
+
 			_save = ["pdw_objects", "SCALAR"];
 			_counter = MEMBER("read", _save);
 
@@ -157,11 +157,11 @@
 
 		PUBLIC FUNCTION("array","saveObject") {
 			private ["_array", "_name", "_result", "_object"];
-			
+
 			_name = _this select 0;
 			_object = _this select 1;
-			
-			if (isnil "_name") exitwith { 
+
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a object name to saveObject");
 			};
 
@@ -177,17 +177,17 @@
 				(getItemCargo _object),
 				(getBackpackCargo _object)
 				];
-			
+
 			_save = [_name, _array];
 			_result = MEMBER("write", _save);
 		};
 
 		PUBLIC FUNCTION("string","loadObject") {
 			private ["_array", "_name", "_object", "_item", "_count"];
-			
+
 			_name = _this;
 
-			if (isnil "_name") exitwith { 
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a object name to loadObject");
 			};
 
@@ -236,15 +236,15 @@
 
 			_object = _this;
 			_name = getPlayerUID _this;
-			
-			if (isnil "_name") exitwith { 
+
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to savePlayer");
 			};
 
 			_name = format["pdw_unit_%1", getPlayerUID _this];
 
 			_array = [(getpos _object), (getdir _object), (getdammage _object)];
-			
+
 			_save = [_name, _array];
 			MEMBER("write", _save);
 		};
@@ -254,15 +254,15 @@
 
 			_name = getPlayerUID _this;
 
-			if (isnil "_name") exitwith { 
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to loadUnit");
 			};
 
-			_name = format["pdw_unit_%1", getPlayerUID _this];		
+			_name = format["pdw_unit_%1", getPlayerUID _this];
 
 			_save = [_name, "ARRAY"];
 			_array = MEMBER("read", _save);
-			if(_array isequalto "") exitwith {false};	
+			if(_array isequalto "") exitwith {false};
 
 			_position	= _array select 0;
 			_dir		= _array select 1;
@@ -278,15 +278,15 @@
 
 			_name = _this select 0;
 			_object = _this select 1;
-			
-			if (isnil "_name") exitwith { 
+
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to saveUnit");
 			};
 
 			_name = "pdw_unit_" + _name;
 
 			_array = [(typeof _object), (getpos _object), (getdir _object), (getdammage _object)];
-			
+
 			_save = [_name, _array];
 			MEMBER("write", _save);
 		};
@@ -296,15 +296,15 @@
 
 			_name = _this;
 
-			if (isnil "_name") exitwith { 
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to loadUnit");
 			};
 
-			_name = "pdw_unit_" + _name;			
+			_name = "pdw_unit_" + _name;
 
 			_save = [_name, "ARRAY"];
 			_array = MEMBER("read", _save);
-			if(_array isequalto "") exitwith {false};	
+			if(_array isequalto "") exitwith {false};
 
 			_typeof 	= _array select 0;
 			_position	= _array select 1;
@@ -323,23 +323,23 @@
 
 			_name = _this select 0;
 			_object = _this select 1;
-			
-			if (isnil "_name") exitwith { 
+
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to saveUnit");
 			};
 
-			_name = "pdw_inventory_" + _name;			
+			_name = "pdw_inventory_" + _name;
 
 			_array = [
-				(headgear _object), 
-				(goggles _object), 
-				(uniform _object), 
-				(UniformItems _object), 
-				(vest _object), 
-				(VestItems _object), 
-				(backpack _object), 
-				(backpackItems _object), 
-				(primaryWeapon _object), 
+				(headgear _object),
+				(goggles _object),
+				(uniform _object),
+				(UniformItems _object),
+				(vest _object),
+				(VestItems _object),
+				(backpack _object),
+				(backpackItems _object),
+				(primaryWeapon _object),
 				(primaryWeaponItems _object),
 				(primaryWeaponMagazine _object),
 				(secondaryWeapon _object),
@@ -361,17 +361,17 @@
 			_name = _this select 0;
 			_object = _this select 1;
 
-			if (isnil "_name") exitwith { 
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to loadUnit");
 			};
 
-			_name = "pdw_inventory_" + _name;			
+			_name = "pdw_inventory_" + _name;
 
 			MEMBER("ClearInventory", _object);
 
 			_save = [_name, "ARRAY"];
 			_array = MEMBER("read", _save);
-			if(_array isequalto "") exitwith {false};	
+			if(_array isequalto "") exitwith {false};
 
 			_headgear = _array select 0;
 			_goggles = _array select 1;
@@ -402,13 +402,13 @@
 					_object addItemToUniform _x;
 				};
 			}foreach _uniformitems;
-	
+
 			{
 				if(_x != "") then {
 					_object addItemToVest _x;
 				};
 			}foreach _vestitems;
-	
+
 			if(format["%1", _backpack] != "") then {
 				_object addbackpack _backpack;
 				{
@@ -417,7 +417,7 @@
 					};
 				} foreach _backpackitems;
 			};
-	
+
 			{
 				if(_x != "") then {
 					_object addMagazine _x;
@@ -426,13 +426,13 @@
 
 			//must be after assign items to secure loading mags
 			_object addweapon _primaryweapon;
-	
+
 			{
 				if(_x != "") then {
 					_object addPrimaryWeaponItem _x;
 				};
 			} foreach _primaryweaponitems;
-	
+
 			{
 				if(_x != "") then {
 					_object addMagazine _x;
@@ -440,14 +440,14 @@
 			} foreach _secondaryweaponmagazine;
 
 			_object addweapon _secondaryweapon;
-	
+
 			{
 				if(_x != "") then {
 					_object addSecondaryWeaponItem _x;
 				};
 			} foreach _secondaryweaponitems;
-	
-	
+
+
 			{
 				if(_x != "") then {
 					_object addMagazine _x;
@@ -455,13 +455,13 @@
 			} foreach _handgunweaponmagazine;
 
 			_object addweapon _handgunweapon;
-	
+
 			{
 				if(_x != "") then {
 					_object addHandgunItem _x;
 				};
 			} foreach _handgunweaponitems;
-	
+
 			{
 				if(_x != "") then {
 					_object additem _x;
@@ -482,15 +482,15 @@
 			_UID = _this select 1;
 			_amount = _this select 2;
 
-			
-			if (isnil "_name") exitwith { 
+
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to savePlayerMoney");
 			};
 
 			_name = format["aegis_%1_%2", _name, _UID];
 
 			_array = [_amount];
-			
+
 			_save = [_name, _array];
 			MEMBER("write", _save);
 		};
@@ -501,10 +501,10 @@
 
 			_name = _this select 0;
 			_UID = _this select 1;
-			
 
-			
-			if (isnil "_name") exitwith { 
+
+
+			if (isnil "_name") exitwith {
 				MEMBER("ToLog", "PDW: require a unit name to getPlayerBalance");
 			};
 
@@ -512,17 +512,17 @@
 
 			_save = [_name, "ARRAY"];
 			_array = MEMBER("read", _save);
-			if(_array isequalto "") exitwith {false};	
+			if(_array isequalto "") exitwith {false};
 
 			_balance = _array select 0;
 
 			_balance;
-			
+
 		};
 
 
 
-		PUBLIC FUNCTION("","deconstructor") { 
+		PUBLIC FUNCTION("","deconstructor") {
 			DELETE_VARIABLE("driver");
 			DELETE_VARIABLE("filename");
 		};

@@ -13,5 +13,10 @@ class CfgFunctions
 		{
 			class transactionManager {file = "aegis\functions\transactionManager.sqf";};
 		}
+		class gameplay
+		{
+			class respawnManager {file = "aegis\functions\respawnManager.sqf";};
+			class clearInventory {file = "aegis\functions\clearInventory.sqf";};
+		}
 	};
 };
