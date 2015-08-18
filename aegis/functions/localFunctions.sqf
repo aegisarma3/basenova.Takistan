@@ -13,8 +13,15 @@ f_transaction = {
 
 
 	if (_cost > _balance) then {
-		rHINT = [operator, "Seu saldo é insuficiente para esta ação.",false];
-		publicVariable "rHINT";
+
+		hintC "Seu saldo é insuficiente para esta ação.";
+		hintC_arr_EH = findDisplay 57 displayAddEventHandler ["unload", {
+			0 = _this spawn {
+				_this select 0 displayRemoveEventHandler ["unload", hintC_arr_EH];
+				hintSilent "";
+			};
+		}];
+
 
 	} else {
 		_balance = _balance - _cost;
@@ -30,7 +37,12 @@ f_transaction = {
 f_show_balance = {
 	_balance = aegisOperatorMoney;
 
-	rHINT = [operator, format ["Saldo na Conta Corrente: $%1", _balance],false];
-	publicVariable "rHINT";
+	hintC format ["Saldo na Conta Corrente: $%1", _balance];
+	hintC_arr_EH = findDisplay 57 displayAddEventHandler ["unload", {
+		0 = _this spawn {
+			_this select 0 displayRemoveEventHandler ["unload", hintC_arr_EH];
+			hintSilent "";
+		};
+	}];
 
 };
