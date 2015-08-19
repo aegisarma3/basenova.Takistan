@@ -18,6 +18,7 @@ class CfgFunctions
 		{
 			class respawnManager {file = "aegis\functions\respawnManager.sqf";};
 			class clearInventory {file = "aegis\functions\clearInventory.sqf";};
+			class restoreInventory {file = "aegis\functions\restoreInventory.sqf";};
 		}
 	};
 };

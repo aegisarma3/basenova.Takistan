@@ -31,4 +31,8 @@ if (undefined(_balance)) then {
 	// Se ele já tiver dinheiro na conta, informa a quantia ao player
 	rHINT = [aegisOperator, format ["Seu saldo é de $%1", _balance],false];
 	publicVariable "rHINT";
+
+	// o usuario já tem loadout
+	["loadPlayer", [aegisOperator, aegisOperatorName, aegisOperatorUID]] call pdw;
+	["loadInventory", [aegisOperator, aegisOperatorName, aegisOperatorUID]] call pdw;
 };
