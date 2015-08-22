@@ -80,3 +80,6 @@ NAME_OF_THE_ARMORY allowDamage false;
 	true,
 	false
 ] call BIS_fnc_MP;
+
+
+call aegis_fnc_checkCivEH;

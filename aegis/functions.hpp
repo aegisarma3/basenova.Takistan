@@ -13,16 +13,27 @@ class CfgFunctions
 		class transactions
 		{
 			class transactionManager {file = "aegis\functions\transactionManager.sqf";};
+			class makePayment {file = "aegis\functions\makePayment.sqf";};
 		}
 		class gameplay
 		{
 			class respawnManager {file = "aegis\functions\respawnManager.sqf";};
 			class clearInventory {file = "aegis\functions\clearInventory.sqf";};
 			class restoreInventory {file = "aegis\functions\restoreInventory.sqf";};
+			class showCivKiller {file = "aegis\functions\showCivKiller.sqf";};
+			class checkCivEH {file = "aegis\functions\checkCivEH.sqf";};
 		}
 	};
 };
 
+class cfgNotifications {
+  class CivilDeath {
+  title = "%1";
+  iconPicture = "\a3\Ui_F_Curator\Data\CfgMarkers\kia_ca.paa";
+  description = "%2";
+  duration = 10;
+  };
+};
 
 
 // Métodos do ACE3

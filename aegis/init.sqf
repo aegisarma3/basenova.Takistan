@@ -5,7 +5,6 @@ if (isServer) then {
   //######### SERVER EH's ###########################################################################
   "operator" addPublicVariableEventHandler {operator call aegis_fnc_clientInit;};
   "currentBalance" addPublicVariableEventHandler {currentBalance call aegis_fnc_transactionManager;};
-  //["aegis_id", "onPlayerDisconnected", "aegis_fnc_disconnectmanager"] call BIS_fnc_addStackedEventhandler;
   addMissionEventHandler ["HandleDisconnect",{_this call aegis_fnc_disconnectmanager}];
   //##################################################################################################
 };
