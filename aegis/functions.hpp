@@ -5,7 +5,7 @@ class CfgFunctions
 		class initialization
 		{
 			class clientInit {file = "aegis\functions\clientInit.sqf";};
-			class serverInit {file = "aegis\functions\serverInit.sqf";};
+			class serverInit {file = "aegis\functions\serverInit.sqf";preInit = 1;};
 			class remoteHint {file = "aegis\functions\remoteHint.sqf";};
 			class localFunctions {file = "aegis\functions\localFunctions.sqf";};
 			class disconnectManager {file = "aegis\functions\disconnectManager.sqf";};

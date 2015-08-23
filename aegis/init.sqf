@@ -5,12 +5,9 @@ if (isServer) then {
   "currentBalance" addPublicVariableEventHandler {currentBalance call aegis_fnc_transactionManager;};
   addMissionEventHandler ["HandleDisconnect",{_this call aegis_fnc_disconnectmanager}];
   //##################################################################################################
-
   call aegis_fnc_serverInit;
   call aegis_fnc_checkCivEH;
 };
-
-
 
 if (!isDedicated) then
 {
@@ -18,6 +15,7 @@ if (!isDedicated) then
 	{
 		if (hasInterface) then // Normal player
 		{
+
       waitUntil {!IsNull player && alive player};
       //######### CLIENT EH's ###################################################################
       "rHINT" addPublicVariableEventHandler {(_this select 1) call aegis_fnc_remoteHint;};
