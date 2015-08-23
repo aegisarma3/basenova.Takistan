@@ -19,6 +19,8 @@ if (_name != "__SERVER__") then {
 	diag_log _owner;
 	diag_log "############################################";
 
+	sleep 1;
+
 	// Verifica o quanto de dinheiro o player tem
 	_balance = ["getPlayerBalance", [_name, _uid]] call pdw;
 	aegisOperatorMoney = _balance;
@@ -31,10 +33,10 @@ if (_name != "__SERVER__") then {
 		["savePlayerMoney", [_name, _uid, START_MONEY]] call pdw;
 		aegisOperatorMoney = START_MONEY;
 		_owner publicVariableClient "aegisOperatorMoney";
-
+		sleep 1;
 		// Avisa o player que foi adicionado uma grana na conta dele
-		rHINT = [_player, format ["Foram adicionados $%1 em sua conta. Bem vindo!", START_MONEY],false];
-		publicVariable "rHINT";
+		[["CheckBalance", ["AEGIS FINACIAL SERVICES 2.0", format ["Foram adicionados $%1 em sua conta.<br/> Bem vindo!",START_MONEY]]], "BIS_fnc_showNotification", owner _player] call BIS_fnc_MP;
+		["alert", "playSound", owner _player] call BIS_fnc_MP;
 
 		// Limpa o inventário do player
 		if (_isNewPlayerInventoryEraseAllowed == 1) then {
@@ -42,9 +44,10 @@ if (_name != "__SERVER__") then {
 		};
 
 	} else {
+		sleep 1;
 		// Se ele já tiver dinheiro na conta, informa a quantia ao player
-		rHINT = [_player, format ["Seu saldo é de $%1", _balance],false];
-		publicVariable "rHINT";
+		[["CheckBalance", ["AEGIS FINACIAL SERVICES 2.0", format ["Saldo na conta corrente: $%1",_balance]]], "BIS_fnc_showNotification", owner _player] call BIS_fnc_MP;
+		["alert", "playSound", owner _player] call BIS_fnc_MP;
 
 		// o usuario já tem loadout
 		if (_isPositionLoadAllowed == 1) then {

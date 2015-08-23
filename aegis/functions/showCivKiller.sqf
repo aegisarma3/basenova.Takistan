@@ -9,6 +9,7 @@ _side = side (_this select 1);
 
 unitName = name (_this select 1);
 
+
 if (_side == WEST || _side == sideEnemy) then {
     civKia = civKia + 1;
     publicvariable "civKia";

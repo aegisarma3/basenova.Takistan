@@ -9,7 +9,7 @@ if (isServer) then {
   call aegis_fnc_checkCivEH;
 };
 
-if (!isDedicated) then
+if (!isServer) then
 {
 	[] spawn
 	{
@@ -18,7 +18,6 @@ if (!isDedicated) then
 
       waitUntil {!IsNull player && alive player};
       //######### CLIENT EH's ###################################################################
-      "rHINT" addPublicVariableEventHandler {(_this select 1) call aegis_fnc_remoteHint;};
       player addEventHandler ["Respawn",{call aegis_fnc_respawnManager;}];
       //#########################################################################################
 

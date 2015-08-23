@@ -6,7 +6,6 @@ class CfgFunctions
 		{
 			class clientInit {file = "aegis\functions\clientInit.sqf";};
 			class serverInit {file = "aegis\functions\serverInit.sqf";preInit = 1;};
-			class remoteHint {file = "aegis\functions\remoteHint.sqf";};
 			class localFunctions {file = "aegis\functions\localFunctions.sqf";};
 			class disconnectManager {file = "aegis\functions\disconnectManager.sqf";};
 			class getPlayerById {file = "aegis\functions\getPlayerById.sqf";};
@@ -34,6 +33,38 @@ class cfgNotifications {
   description = "%2";
   duration = 10;
   };
+
+	class Transaction {
+  title = "%1";
+  iconPicture = "aegis\ui\pagamento.paa";
+  description = "%2";
+  duration = 10;
+  };
+
+	class CheckBalance {
+  title = "%1";
+  iconPicture = "aegis\ui\consulta.paa";
+  description = "%2";
+  duration = 10;
+  };
+};
+
+
+class CfgSounds
+{
+	sounds[] = {};
+	class alert
+	{
+		name = "alert";
+		sound[] = {"aegis\sounds\alert.ogg", 1, 1};
+		titles[] = {};
+	};
+	class cash
+	{
+		name = "cash";
+		sound[] = {"aegis\sounds\cash.ogg", 1, 1};
+		titles[] = {};
+	};
 };
 
 

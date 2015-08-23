@@ -36,7 +36,7 @@ f_transaction = {
 
 f_show_balance = {
 	_balance = aegisOperatorMoney;
-
+	
 	hintC format ["Saldo na Conta Corrente: $%1", _balance];
 	hintC_arr_EH = findDisplay 57 displayAddEventHandler ["unload", {
 		0 = _this spawn {
