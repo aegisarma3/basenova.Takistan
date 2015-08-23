@@ -1,9 +1,6 @@
 civKia = 0;
 publicvariable "civKia";
 
-// Declara uma variavel fora do escopo normal
-unitName = "";
-
 // Verifica de 5 em 5 segundos os civis que estao no mapa e adiciona um EH a eles caso precise.
 private ["_allCivs"];
 while { true } do {

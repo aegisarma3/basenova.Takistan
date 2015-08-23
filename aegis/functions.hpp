@@ -9,6 +9,7 @@ class CfgFunctions
 			class remoteHint {file = "aegis\functions\remoteHint.sqf";};
 			class localFunctions {file = "aegis\functions\localFunctions.sqf";};
 			class disconnectManager {file = "aegis\functions\disconnectManager.sqf";};
+			class getPlayerById {file = "aegis\functions\getPlayerById.sqf";};
 		};
 		class transactions
 		{

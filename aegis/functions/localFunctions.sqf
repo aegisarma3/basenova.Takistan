@@ -4,7 +4,7 @@ f_arsenal = {
 };
 
 f_transaction = {
-	private["_cost","_action"];
+	private["_cost","_action","_balance"];
 
 	_balance = aegisOperatorMoney;
 
@@ -25,7 +25,7 @@ f_transaction = {
 
 	} else {
 		_balance = _balance - _cost;
-		currentBalance = [operator,_balance];
+		currentBalance = [player,_balance];
 		publicVariableServer "currentBalance";
 
 		if (_balance <= 0) then {_balance = 1;};
