@@ -625,3 +625,36 @@ class ACE_Settings {
         force = 1;
     };
 };
+
+
+class Params
+{
+	class AEGIS_BlankParam1
+	{
+	  title = "----------------------------------- Economia -----------------------------------";
+	  values[] = {-99999};
+	  texts[] = {""};
+	  default = -99999;
+	};
+	class AEGIS_INITIAL_MONEY
+	{
+		title = "Dinheiro inicial dado a novos jogadores";
+		texts[] = {"$1000","$3000","$5000","$7000","$10000"};
+		values[] = {1000,3000,5000,7000,10000};
+		default = 5000;
+	};
+	class AEGIS_ARSENAL_ENABLE
+	{
+		title = "Ativar acesso ao ARSENAL?";
+		texts[] = {"Sim","Não"};
+		values[] = {1,0};
+		default = 1;
+	};
+	class AEGIS_ARSENAL_COST
+	{
+	  title = "Custo de acesso ao Arsenal";
+	  texts[] = {"$200","$350","$400","$550","$600","$1000"};
+	  values[] = {200,350,400,550,600,1000};
+	  default = 350;
+	};
+};
