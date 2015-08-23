@@ -6,7 +6,11 @@ private ["_name","_uid","_player","_balance"];
 	_player	= [_name, _uid] call aegis_fnc_getPlayerById;
 	_owner = owner _player;
 
-if (_name != "__SERVER__") then {  
+	_isPositionLoadAllowed = ["AEGIS_PLAYER_POSITION", 1] call BIS_fnc_getParamValue;
+	_isInventoryLoadAllowed = ["AEGIS_LOAD_INVENTORY", 1] call BIS_fnc_getParamValue;
+	_isNewPlayerInventoryEraseAllowed = ["AEGIS_CLEAR_INVENTORY", 1] call BIS_fnc_getParamValue;
+
+if (_name != "__SERVER__") then {
 
 	diag_log "################ CONNECTED ##############";
 	diag_log _player;
@@ -33,7 +37,9 @@ if (_name != "__SERVER__") then {
 		publicVariable "rHINT";
 
 		// Limpa o inventário do player
-		[_player,"aegis_fnc_clearInventory",_owner,true] call BIS_fnc_MP;
+		if (_isNewPlayerInventoryEraseAllowed == 1) then {
+			[_player,"aegis_fnc_clearInventory",_owner,true] call BIS_fnc_MP;
+		};
 
 	} else {
 		// Se ele já tiver dinheiro na conta, informa a quantia ao player
@@ -41,8 +47,12 @@ if (_name != "__SERVER__") then {
 		publicVariable "rHINT";
 
 		// o usuario já tem loadout
-		["loadPlayer", [_player, _name, _uid]] call pdw;
-		["loadInventory", [_player, _name, _uid]] call pdw;
+		if (_isPositionLoadAllowed == 1) then {
+			["loadPlayer", [_player, _name, _uid]] call pdw;
+		};
+		if (_isInventoryLoadAllowed == 1) then {
+			["loadInventory", [_player, _name, _uid]] call pdw;
+		};
 	};
 
 };

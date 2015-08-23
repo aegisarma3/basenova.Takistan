@@ -10,6 +10,13 @@ diag_log _uid;
 diag_log _name;
 diag_log "############################################";
 
-["savePlayer", [_player, _name, _uid]] call pdw;
-["saveInventory", [_player, _name, _uid]] call pdw;
-deleteVehicle _player;
+_isPositionLoadAllowed = ["AEGIS_PLAYER_POSITION", 1] call BIS_fnc_getParamValue;
+_isInventoryLoadAllowed = ["AEGIS_LOAD_INVENTORY", 1] call BIS_fnc_getParamValue;
+
+if (_isInventoryLoadAllowed == 1) then {
+  ["saveInventory", [_player, _name, _uid]] call pdw;
+};
+if (_isPositionLoadAllowed == 1) then {
+  ["savePlayer", [_player, _name, _uid]] call pdw;
+  deleteVehicle _player;
+};

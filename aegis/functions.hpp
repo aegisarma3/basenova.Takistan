@@ -639,22 +639,50 @@ class Params
 	class AEGIS_INITIAL_MONEY
 	{
 		title = "Dinheiro inicial dado a novos jogadores";
-		texts[] = {"$1000","$3000","$5000","$7000","$10000"};
+		texts[] = {"$1000","$3000","$5000 (Padrão)","$7000","$10000"};
 		values[] = {1000,3000,5000,7000,10000};
 		default = 5000;
 	};
 	class AEGIS_ARSENAL_ENABLE
 	{
 		title = "Ativar acesso ao ARSENAL?";
-		texts[] = {"Sim","Não"};
+		texts[] = {"Sim (Padrão)","Não (SpecOps)"};
 		values[] = {1,0};
 		default = 1;
 	};
 	class AEGIS_ARSENAL_COST
 	{
 	  title = "Custo de acesso ao Arsenal";
-	  texts[] = {"$200","$350","$400","$550","$600","$1000"};
+	  texts[] = {"$200","$350 (Padrão)","$400","$550","$600","$1000"};
 	  values[] = {200,350,400,550,600,1000};
 	  default = 350;
+	};
+	class AEGIS_BlankParam2
+	{
+		title = "----------------------------------- Persistência (DB)  -----------------------------------";
+		values[] = {-99999};
+		texts[] = {""};
+		default = -99999;
+	};
+	class AEGIS_PLAYER_POSITION
+	{
+		title = "Restaurar POSIÇÃO do jogador na conexão?";
+		texts[] = {"Sim (Padrão)","Não (SpecOps)"};
+		values[] = {1,0};
+		default = 1;
+	};
+	class AEGIS_LOAD_INVENTORY
+	{
+		title = "Restaurar INVENTÁRIO do jogador na conexão?";
+		texts[] = {"Sim (Padrão)","Não (SpecOps)"};
+		values[] = {1,0};
+		default = 1;
+	};
+	class AEGIS_CLEAR_INVENTORY
+	{
+		title = "Limpar inventário de novos jogadores?";
+		texts[] = {"Sim (Padrão)","Não (SpecOps)"};
+		values[] = {1,0};
+		default = 1;
 	};
 };
